@@ -1,0 +1,61 @@
+{
+  "name": "course-builder",
+  "version": "1.0.0",
+  "description": "A course builder coded using Node.js and React.js",
+  "main": "server.js",
+  "scripts": {
+    "eslint": "eslint server.js --color",
+    "prettier:check": "prettier --check 'src/**/*.{js,json,scss,md}'",
+    "prettier": "prettier --write 'src/**/*.{js,json,scss,md}'",
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnandresmedina/course-builder.git"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "mongodb",
+    "mongoose",
+    "react.js",
+    "redux"
+  ],
+  "author": "John Medina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnandresmedina/course-builder/issues"
+  },
+  "homepage": "https://github.com/johnandresmedina/course-builder#readme",
+  "dependencies": {
+    "config": "^3.2.4",
+    "express": "^4.17.1",
+    "express-validator": "^6.2.0",
+    "mongoose": "^5.7.11"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "concurrently": "^5.0.0",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-flowtype": "^4.4.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "husky": "^3.0.9",
+    "nodemon": "^1.19.4",
+    "prettier": "1.19.1",
+    "pretty-quick": "^2.0.1"
+  }
+}
