@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   InputGroup,
   InputGroupAddon,
@@ -13,35 +14,46 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
-const CourseForm = () => {
+const CourseForm = ({ updateField, formValues }) => {
   return (
     <Form>
       <Row form>
         <Col md={12}>
           <FormGroup>
             <Label for='title'>Title</Label>
-            <Input type='title' name='title' id='title' placeholder='The title of the course' />
+            <Input
+              type='text'
+              name='title'
+              id='title'
+              placeholder='The title of the course'
+              value={formValues.title}
+              onChange={updateField}
+            />
           </FormGroup>
         </Col>
         <Col md={12}>
           <FormGroup>
             <Label for='subtitle'>Subtitle</Label>
             <Input
-              type='subtitle'
+              type='text'
               name='subtitle'
               id='subtitle'
               placeholder='The subtitle of the course'
+              value={formValues.subtitle}
+              onChange={updateField}
             />
           </FormGroup>
         </Col>
         <Col md={12}>
           <FormGroup>
-            <Label for='examplePassword'>Description</Label>
+            <Label for='description'>Description</Label>
             <Input
-              type='description'
+              type='text'
               name='description'
               id='description'
               placeholder='The description of the course'
+              value={formValues.description}
+              onChange={updateField}
             />
           </FormGroup>
         </Col>
@@ -50,7 +62,13 @@ const CourseForm = () => {
             <InputGroupAddon addonType='prepend'>
               <InputGroupText>$</InputGroupText>
             </InputGroupAddon>
-            <Input placeholder='Price' />
+            <Input
+              type='text'
+              name='price'
+              placeholder='Price'
+              value={formValues.price}
+              onChange={updateField}
+            />
           </InputGroup>
         </Col>
         <Col md={6}>
@@ -60,12 +78,23 @@ const CourseForm = () => {
                 <FontAwesomeIcon icon={faHourglassHalf} />
               </InputGroupText>
             </InputGroupAddon>
-            <Input placeholder='Duration' />
+            <Input
+              type='text'
+              name='duration'
+              placeholder='Duration'
+              value={formValues.duration}
+              onChange={updateField}
+            />
           </InputGroup>
         </Col>
       </Row>
     </Form>
   );
+};
+
+CourseForm.propTypes = {
+  formValues: PropTypes.object,
+  updateField: PropTypes.func.isRequired,
 };
 
 export default CourseForm;
