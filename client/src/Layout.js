@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   Collapse,
+  Container,
   Navbar,
   NavbarToggler,
   NavbarBrand,
@@ -50,7 +51,7 @@ const Layout = ({ children }) => {
           </Nav>
         </Collapse>
       </Navbar>
-      {children}
+      <Container fluid>{children}</Container>
     </>
   );
 };
