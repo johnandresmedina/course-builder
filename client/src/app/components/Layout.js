@@ -16,6 +16,8 @@ import {
   DropdownItem,
 } from 'reactstrap';
 
+import CourseModalContainer from '../../modal/containers/CourseModalContainer';
+
 const Layout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -51,6 +53,7 @@ const Layout = ({ children }) => {
           </Nav>
         </Collapse>
       </Navbar>
+      <CourseModalContainer />
       <Container fluid>{children}</Container>
     </>
   );

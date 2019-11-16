@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Layout from './Layout';
-import Home from './home/Home';
-import Courses from './courses/Courses';
+import HomeContainer from '../../home/containers/HomeContainer';
+import Courses from '../../courses/Courses';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path='/'>
-            <Home />
+            <HomeContainer />
           </Route>
           <Route path='/courses'>
             <Courses />
