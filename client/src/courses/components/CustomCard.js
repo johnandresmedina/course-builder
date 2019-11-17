@@ -2,15 +2,9 @@ import './customCard.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  CardText,
-  CardBody,
-  CardLink,
-  CardSubtitle,
-  CardHeader,
-  CardFooter,
-} from 'reactstrap';
+import { Card, CardText, CardBody, CardSubtitle, CardHeader, CardFooter } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const LIMIT_DESCRIPTION = 150;
 const LIMIT_SUBTITLE = 100;
@@ -40,8 +34,12 @@ const CustomCard = ({ course }) => {
         </CardBody>
       )}
       <CardFooter className='course__card-footer'>
-        <CardLink href='#'>Card Link</CardLink>
-        <CardLink href='#'>Another Link</CardLink>
+        <div className='course__card-icon'>
+          <FontAwesomeIcon size='xs' icon={faPen} />
+        </div>
+        <div className='course__card-icon course__card-icon--delete'>
+          <FontAwesomeIcon icon={faTrash} />
+        </div>
       </CardFooter>
     </Card>
   );

@@ -19,7 +19,19 @@
   }
 
   &__card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: auto;
+  }
+
+  &__card-icon {
+    padding: 4px 10px;
+    cursor: pointer;
+
+    &--delete {
+      color: #d75252;
+    }
   }
 
   span {
