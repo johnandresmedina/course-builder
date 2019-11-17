@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { toggleModal } from '../../modal/actions';
 import { createCourse as createCourseAction } from '../../courses/actions';
@@ -10,6 +11,7 @@ const CourseModalContainer = ({
   createCourseAction,
   courseError,
   creatingCourse,
+  history,
   showModal,
   toggleModal,
 }) => {
@@ -29,7 +31,7 @@ const CourseModalContainer = ({
   };
 
   const createCourse = () => {
-    createCourseAction(formValues);
+    createCourseAction(formValues, history);
   };
 
   return (
@@ -51,15 +53,18 @@ CourseModalContainer.propTypes = {
   createCourseAction: PropTypes.func.isRequired,
   courseError: PropTypes.object.isRequired,
   creatingCourse: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
   showModal: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };
 
-export default connect(
-  state => ({
-    showModal: state.courseModalState.showModal,
-    creatingCourse: state.coursesState.creatingCourse,
-    courseError: state.coursesState.error,
-  }),
-  { createCourseAction, toggleModal },
-)(CourseModalContainer);
+export default withRouter(
+  connect(
+    state => ({
+      showModal: state.courseModalState.showModal,
+      creatingCourse: state.coursesState.creatingCourse,
+      courseError: state.coursesState.error,
+    }),
+    { createCourseAction, toggleModal },
+  )(CourseModalContainer),
+);
