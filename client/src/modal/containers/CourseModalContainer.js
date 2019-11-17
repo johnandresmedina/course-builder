@@ -48,6 +48,7 @@ const CourseModalContainer = ({
 
   return (
     <CourseModal
+      title='Create Course'
       {...{
         createCourse,
         creatingCourse,

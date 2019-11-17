@@ -9,6 +9,8 @@ const initialState = {
   error: {},
   fetchingCourses: false,
   fetchingCoursesError: false,
+  editingCourse: false,
+  editingCourseError: false,
 };
 
 const CoursesReducer = handleActions(
@@ -44,6 +46,22 @@ const CoursesReducer = handleActions(
       ...state,
       fetchingCourses: false,
       fetchingCoursesError: action.payload.error,
+    }),
+    [actions.editCourse]: state => ({
+      ...state,
+      editingCourse: true,
+      editingCourseError: {},
+    }),
+    [actions.editCourseSuccess]: (state, action) => ({
+      ...state,
+      editingCourse: false,
+      activeCourse: action.payload.courseInfo,
+      editingCourseError: {},
+    }),
+    [actions.editCourseError]: (state, action) => ({
+      ...state,
+      editingCourse: false,
+      editingCourseError: action.payload.error,
     }),
   },
   initialState,

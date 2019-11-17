@@ -12,6 +12,7 @@ const CourseModal = ({
   updateField,
   formValues,
   toggleModal,
+  title,
 }) => {
   const handleOnClick = () => {
     toggleModal();
@@ -20,7 +21,7 @@ const CourseModal = ({
   return (
     <div>
       <Modal isOpen={showModal} toggle={handleOnClick}>
-        <ModalHeader toggle={toggleModal}>Create a Course</ModalHeader>
+        <ModalHeader toggle={toggleModal}>{title}</ModalHeader>
         <ModalBody>
           <CourseForm {...{ courseError, updateField, formValues }} />
         </ModalBody>
@@ -44,6 +45,7 @@ CourseModal.propTypes = {
   formValues: PropTypes.object,
   showModal: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
   updateField: PropTypes.func.isRequired,
 };
 

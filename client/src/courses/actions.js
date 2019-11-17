@@ -2,7 +2,7 @@ import { createActions } from 'redux-actions';
 
 import actionTypes from './actionsTypes';
 import courseService from '../services/courseService';
-import { toggleModal } from '../modal/actions';
+import { toggleModal, toggleEditModal } from '../modal/actions';
 
 const actions = createActions(
   actionTypes.CREATING_COURSE,
@@ -11,6 +11,9 @@ const actions = createActions(
   actionTypes.FETCH_COURSES,
   actionTypes.FETCH_COURSES_SUCCESS,
   actionTypes.FETCH_COURSES_ERROR,
+  actionTypes.EDIT_COURSE,
+  actionTypes.EDIT_COURSE_SUCCESS,
+  actionTypes.EDIT_COURSE_ERROR,
 );
 
 const createCourse = (courseInfo, history) => dispatch => {
@@ -28,6 +31,20 @@ const createCourse = (courseInfo, history) => dispatch => {
     });
 };
 
+const editCourse = courseInfo => dispatch => {
+  dispatch(actions.editCourse());
+
+  courseService
+    .editCourse(courseInfo)
+    .then(response => {
+      dispatch(actions.editCourseSuccess({ courseInfo: response.data }));
+      dispatch(toggleEditModal());
+    })
+    .catch(error => {
+      dispatch(actions.editCourseError({ error: error.response.data.errors[0] }));
+    });
+};
+
 const getAllCourses = () => dispatch => {
   dispatch(actions.fetchCourses());
 
@@ -41,4 +58,4 @@ const getAllCourses = () => dispatch => {
     });
 };
 
-export { actions, createCourse, getAllCourses };
+export { actions, createCourse, editCourse, getAllCourses };

@@ -88,4 +88,51 @@ router.post(
   },
 );
 
+// @route PUT api/courses
+// @desc Edit a course
+// @access Public
+router.put(
+  '/:id',
+  [
+    check('title', 'Title is required')
+      .not()
+      .isEmpty(),
+    check('title', 'Title exceeded the max length allow').isLength({ max: 255 }),
+    check('subtitle', 'Subtitle exceeded the max length allow').isLength({ max: 255 }),
+  ],
+  async (request, response) => {
+    const errors = validationResult(request);
+
+    if (!errors.isEmpty()) {
+      return response.status(400).json({ errors: errors.array() });
+    }
+
+    const { title, subtitle = '', description = '', price = null, duration = '' } = request.body;
+
+    try {
+      let course = await Course.findById(request.params.id);
+
+      if (!course) {
+        return response.status(400).json({ errors: [{ msg: 'Course not found' }] });
+      }
+
+      course.title = title;
+      course.subtitle = subtitle;
+      course.description = description;
+      course.price = price;
+      course.duration = duration;
+      await course.save();
+
+      return response.status(200).json(course);
+    } catch (error) {
+      console.error(error.message);
+      if (error.kind === 'ObjectId') {
+        return response.status(404).json({ errors: { msg: 'Course not found' } });
+      }
+
+      response.status(500).send('Server error');
+    }
+  },
+);
+
 module.exports = router;

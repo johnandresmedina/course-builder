@@ -4,13 +4,18 @@ import { actions } from './actions';
 
 const initialState = {
   showModal: false,
+  showEditModal: false,
 };
 
 const CourseModalReducer = handleActions(
   {
-    [actions.toggleModal]: (state, action) => ({
+    [actions.toggleModal]: state => ({
       ...state,
       showModal: !state.showModal,
+    }),
+    [actions.toggleEditModal]: state => ({
+      ...state,
+      showEditModal: !state.showEditModal,
     }),
   },
   initialState,
