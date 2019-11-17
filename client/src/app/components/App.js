@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Layout from './Layout';
 import HomeContainer from '../../home/containers/HomeContainer';
-import Courses from '../../courses/components/Courses';
+import CoursesContainer from '../../courses/containers/CoursesContainer';
 import CreateContentContainer from '../../createContent/containers/CreateContentContainer';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
             <HomeContainer />
           </Route>
           <Route path='/courses'>
-            <Courses />
+            <CoursesContainer />
           </Route>
           <Route path='/create-content'>
             <CreateContentContainer />

@@ -1,0 +1,30 @@
+.course {
+  width: 278px;
+  min-height: 335px;
+  margin: 25px 15px;
+
+  &__header {
+    min-height: 85px;
+    display: flex;
+  }
+
+  &__header-title {
+    margin: auto;
+  }
+
+  &__card-body {
+    padding: 1rem;
+    min-height: 94px;
+    flex: inherit;
+  }
+
+  &__card-footer {
+    margin-top: auto;
+  }
+
+  span {
+    display: inline-block;
+    font-size: 14px;
+    margin: 0;
+  }
+}

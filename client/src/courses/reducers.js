@@ -7,11 +7,13 @@ const initialState = {
   activeCourse: {},
   creatingCourse: false,
   error: {},
+  fetchingCourses: false,
+  fetchingCoursesError: false,
 };
 
 const CoursesReducer = handleActions(
   {
-    [actions.creatingCourse]: (state, action) => ({
+    [actions.creatingCourse]: state => ({
       ...state,
       creatingCourse: true,
       error: {},
@@ -26,6 +28,22 @@ const CoursesReducer = handleActions(
       ...state,
       creatingCourse: false,
       error: action.payload.error,
+    }),
+    [actions.fetchCourses]: state => ({
+      ...state,
+      fetchingCourses: true,
+      fetchingCoursesError: {},
+    }),
+    [actions.fetchCoursesSuccess]: (state, action) => ({
+      ...state,
+      fetchingCourses: false,
+      courses: action.payload.courses,
+      fetchingCoursesError: {},
+    }),
+    [actions.fetchCoursesError]: (state, action) => ({
+      ...state,
+      fetchingCourses: false,
+      fetchingCoursesError: action.payload.error,
     }),
   },
   initialState,

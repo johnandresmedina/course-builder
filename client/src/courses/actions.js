@@ -8,6 +8,9 @@ const actions = createActions(
   actionTypes.CREATING_COURSE,
   actionTypes.CREATE_COURSE_SUCCESS,
   actionTypes.CREATE_COURSE_ERROR,
+  actionTypes.FETCH_COURSES,
+  actionTypes.FETCH_COURSES_SUCCESS,
+  actionTypes.FETCH_COURSES_ERROR,
 );
 
 const createCourse = (courseInfo, history) => dispatch => {
@@ -25,4 +28,17 @@ const createCourse = (courseInfo, history) => dispatch => {
     });
 };
 
-export { actions, createCourse };
+const getAllCourses = () => dispatch => {
+  dispatch(actions.fetchCourses());
+
+  courseService
+    .getAllCourses()
+    .then(response => {
+      dispatch(actions.fetchCoursesSuccess({ courses: response.data }));
+    })
+    .catch(error => {
+      dispatch(actions.fetchCoursesError({ error: error }));
+    });
+};
+
+export { actions, createCourse, getAllCourses };
