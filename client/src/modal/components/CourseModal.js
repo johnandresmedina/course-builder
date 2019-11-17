@@ -4,7 +4,14 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import CourseForm from '../../form/CourseForm';
 
-const CourseModal = ({ createCourse, showModal, updateField, formValues, toggleModal }) => {
+const CourseModal = ({
+  createCourse,
+  creatingCourse,
+  showModal,
+  updateField,
+  formValues,
+  toggleModal,
+}) => {
   const handleOnClick = () => {
     toggleModal();
   };
@@ -17,8 +24,8 @@ const CourseModal = ({ createCourse, showModal, updateField, formValues, toggleM
           <CourseForm {...{ updateField, formValues }} />
         </ModalBody>
         <ModalFooter>
-          <Button color='primary' onClick={createCourse}>
-            Save
+          <Button color='primary' disabled={creatingCourse} onClick={createCourse}>
+            {!creatingCourse ? 'Save' : 'Saving'}
           </Button>{' '}
           <Button color='secondary' onClick={handleOnClick}>
             Cancel
@@ -31,6 +38,7 @@ const CourseModal = ({ createCourse, showModal, updateField, formValues, toggleM
 
 CourseModal.propTypes = {
   createCourse: PropTypes.func.isRequired,
+  creatingCourse: PropTypes.bool.isRequired,
   formValues: PropTypes.object,
   showModal: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
