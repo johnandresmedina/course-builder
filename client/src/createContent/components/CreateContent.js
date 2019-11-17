@@ -21,7 +21,7 @@ const CreateContent = ({ activeCourse, showEditModal, toggleEditModal }) => {
           <div className='create-content'>
             <h1 className='text-center'>
               {activeCourse.title}{' '}
-              <Badge color='light' onClick={handleOnClick}>
+              <Badge className='create-content__edit' color='light' onClick={handleOnClick}>
                 <FontAwesomeIcon size='xs' icon={faPen} />
               </Badge>
             </h1>

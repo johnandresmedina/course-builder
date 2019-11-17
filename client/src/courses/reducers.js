@@ -63,6 +63,10 @@ const CoursesReducer = handleActions(
       editingCourse: false,
       editingCourseError: action.payload.error,
     }),
+    [actions.setActiveCourse]: (state, action) => ({
+      ...state,
+      activeCourse: action.payload.activeCourse,
+    }),
   },
   initialState,
 );

@@ -13,7 +13,12 @@ const truncateText = (text, limit) => {
   return text.length > limit ? `${text.substring(0, LIMIT_SUBTITLE)}...` : text;
 };
 
-const CustomCard = ({ course }) => {
+const CustomCard = ({ course, setActiveCourse, history }) => {
+  const handleOnEditClick = () => {
+    setActiveCourse(course);
+    history.push('/create-content');
+  };
+
   return (
     <Card className='course'>
       <CardHeader className='course__header'>
@@ -34,7 +39,7 @@ const CustomCard = ({ course }) => {
         </CardBody>
       )}
       <CardFooter className='course__card-footer'>
-        <div className='course__card-icon'>
+        <div className='course__card-icon' onClick={handleOnEditClick}>
           <FontAwesomeIcon size='xs' icon={faPen} />
         </div>
         <div className='course__card-icon course__card-icon--delete'>
@@ -47,6 +52,8 @@ const CustomCard = ({ course }) => {
 
 CustomCard.propTypes = {
   course: PropTypes.object.isRequired,
+  setActiveCourse: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default CustomCard;

@@ -14,6 +14,7 @@ const actions = createActions(
   actionTypes.EDIT_COURSE,
   actionTypes.EDIT_COURSE_SUCCESS,
   actionTypes.EDIT_COURSE_ERROR,
+  actionTypes.SET_ACTIVE_COURSE,
 );
 
 const createCourse = (courseInfo, history) => dispatch => {
@@ -58,4 +59,8 @@ const getAllCourses = () => dispatch => {
     });
 };
 
-export { actions, createCourse, editCourse, getAllCourses };
+const setActiveCourse = courseInfo => dispatch => {
+  dispatch(actions.setActiveCourse({ activeCourse: courseInfo }));
+};
+
+export { actions, createCourse, editCourse, getAllCourses, setActiveCourse };
