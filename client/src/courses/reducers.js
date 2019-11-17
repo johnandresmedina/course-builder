@@ -14,11 +14,13 @@ const CoursesReducer = handleActions(
     [actions.creatingCourse]: (state, action) => ({
       ...state,
       creatingCourse: true,
+      error: {},
     }),
     [actions.createCourseSuccess]: (state, action) => ({
       ...state,
       creatingCourse: false,
       activeCourse: action.payload.courseInfo,
+      error: {},
     }),
     [actions.createCourseError]: (state, action) => ({
       ...state,
