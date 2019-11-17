@@ -18,7 +18,7 @@ const createCourse = courseInfo => dispatch => {
       dispatch(actions.createCourseSuccess({ courseInfo: response.data }));
     })
     .catch(error => {
-      dispatch(actions.createCourseError({ error }));
+      dispatch(actions.createCourseError({ error: error.response.data.errors[0] }));
     });
 };
 

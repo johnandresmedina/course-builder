@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 const createCourse = async courseInfo => {
-  try {
-    const response = await axios.post('/api/courses', {
-      ...courseInfo,
-    });
-    return response;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  //try {
+  const response = await axios.post('/api/courses', {
+    ...courseInfo,
+  });
+
+  return response;
+  //} catch (error) {
+  //throw error;
+  //}
 };
 
 const getAllCourses = async () => {

@@ -6,7 +6,7 @@ const initialState = {
   courses: [],
   activeCourse: {},
   creatingCourse: false,
-  error: null,
+  error: {},
 };
 
 const CoursesReducer = handleActions(

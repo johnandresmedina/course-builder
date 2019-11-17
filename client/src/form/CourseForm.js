@@ -1,61 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  Col,
-  Row,
-  Form,
-  FormGroup,
-  Label,
-} from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, Col, Row, Form } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
-const CourseForm = ({ updateField, formValues }) => {
+import CustomInput from './CustomInput';
+
+const showError = fieldName => formValues => error => {
+  return formValues[fieldName] ? false : error.param === fieldName;
+};
+
+const isTitleError = (error, formValues) => showError('title')(formValues)(error);
+
+const CourseForm = ({ courseError, updateField, formValues }) => {
+  const titleError = isTitleError(courseError, formValues);
+
   return (
     <Form>
       <Row form>
         <Col md={12}>
-          <FormGroup>
-            <Label for='title'>Title</Label>
-            <Input
-              type='text'
-              name='title'
-              id='title'
-              placeholder='The title of the course'
-              value={formValues.title}
-              onChange={updateField}
-            />
-          </FormGroup>
+          <CustomInput
+            label='title'
+            showLabel
+            value={formValues.title}
+            onChange={updateField}
+            invalid={titleError}
+            error={courseError}
+          />
         </Col>
         <Col md={12}>
-          <FormGroup>
-            <Label for='subtitle'>Subtitle</Label>
-            <Input
-              type='text'
-              name='subtitle'
-              id='subtitle'
-              placeholder='The subtitle of the course'
-              value={formValues.subtitle}
-              onChange={updateField}
-            />
-          </FormGroup>
+          <CustomInput
+            label='subtitle'
+            showLabel
+            value={formValues.subtitle}
+            onChange={updateField}
+          />
         </Col>
         <Col md={12}>
-          <FormGroup>
-            <Label for='description'>Description</Label>
-            <Input
-              type='text'
-              name='description'
-              id='description'
-              placeholder='The description of the course'
-              value={formValues.description}
-              onChange={updateField}
-            />
-          </FormGroup>
+          <CustomInput
+            label='description'
+            showLabel
+            type={'textarea'}
+            value={formValues.description}
+            onChange={updateField}
+          />
         </Col>
         <Col md={6}>
           <InputGroup>
@@ -93,7 +81,8 @@ const CourseForm = ({ updateField, formValues }) => {
 };
 
 CourseForm.propTypes = {
-  formValues: PropTypes.object,
+  courseError: PropTypes.object.isRequired,
+  formValues: PropTypes.object.isRequired,
   updateField: PropTypes.func.isRequired,
 };
 

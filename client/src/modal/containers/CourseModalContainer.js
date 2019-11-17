@@ -6,7 +6,13 @@ import { toggleModal } from '../../modal/actions';
 import { createCourse as createCourseAction } from '../../courses/actions';
 import CourseModal from '../components/CourseModal';
 
-const CourseModalContainer = ({ createCourseAction, creatingCourse, showModal, toggleModal }) => {
+const CourseModalContainer = ({
+  createCourseAction,
+  courseError,
+  creatingCourse,
+  showModal,
+  toggleModal,
+}) => {
   const [formValues, setValues] = useState({
     title: '',
     subtitle: '',
@@ -28,13 +34,22 @@ const CourseModalContainer = ({ createCourseAction, creatingCourse, showModal, t
 
   return (
     <CourseModal
-      {...{ createCourse, creatingCourse, showModal, updateField, formValues, toggleModal }}
+      {...{
+        createCourse,
+        creatingCourse,
+        courseError,
+        showModal,
+        updateField,
+        formValues,
+        toggleModal,
+      }}
     />
   );
 };
 
 CourseModalContainer.propTypes = {
   createCourseAction: PropTypes.func.isRequired,
+  courseError: PropTypes.object.isRequired,
   creatingCourse: PropTypes.bool.isRequired,
   showModal: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
@@ -44,6 +59,7 @@ export default connect(
   state => ({
     showModal: state.courseModalState.showModal,
     creatingCourse: state.coursesState.creatingCourse,
+    courseError: state.coursesState.error,
   }),
   { createCourseAction, toggleModal },
 )(CourseModalContainer);

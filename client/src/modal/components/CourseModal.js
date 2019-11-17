@@ -7,6 +7,7 @@ import CourseForm from '../../form/CourseForm';
 const CourseModal = ({
   createCourse,
   creatingCourse,
+  courseError,
   showModal,
   updateField,
   formValues,
@@ -21,7 +22,7 @@ const CourseModal = ({
       <Modal isOpen={showModal} toggle={handleOnClick}>
         <ModalHeader toggle={toggleModal}>Create a Course</ModalHeader>
         <ModalBody>
-          <CourseForm {...{ updateField, formValues }} />
+          <CourseForm {...{ courseError, updateField, formValues }} />
         </ModalBody>
         <ModalFooter>
           <Button color='primary' disabled={creatingCourse} onClick={createCourse}>
@@ -37,6 +38,7 @@ const CourseModal = ({
 };
 
 CourseModal.propTypes = {
+  courseError: PropTypes.object.isRequired,
   createCourse: PropTypes.func.isRequired,
   creatingCourse: PropTypes.bool.isRequired,
   formValues: PropTypes.object,
