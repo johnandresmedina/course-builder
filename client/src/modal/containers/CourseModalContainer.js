@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -22,6 +22,18 @@ const CourseModalContainer = ({
     price: '',
     duration: '',
   });
+
+  useEffect(() => {
+    return () => {
+      setValues({
+        title: '',
+        subtitle: '',
+        description: '',
+        price: '',
+        duration: '',
+      });
+    };
+  }, [showModal]);
 
   const updateField = e => {
     setValues({

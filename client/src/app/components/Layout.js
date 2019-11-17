@@ -41,8 +41,6 @@ const Layout = ({ children }) => {
                 <Link to='/courses'>
                   <DropdownItem>Courses</DropdownItem>
                 </Link>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
             <NavItem>

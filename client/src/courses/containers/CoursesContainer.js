@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _isEmpty from 'lodash/isEmpty';
 
 import { getAllCourses } from '../../courses/actions';
 import Courses from '../components/Courses';
+import CustomSpinner from '../../spinner/CustomSpinner';
 
 const CoursesContainer = ({ courses, getAllCourses }) => {
   useEffect(() => {
@@ -18,7 +20,7 @@ const CoursesContainer = ({ courses, getAllCourses }) => {
     };
   }, [getAllCourses]);
 
-  return <Courses {...{ courses }} />;
+  return !_isEmpty(courses) ? <Courses {...{ courses }} /> : <CustomSpinner />;
 };
 
 CoursesContainer.propTypes = {
