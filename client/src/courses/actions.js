@@ -15,6 +15,9 @@ const actions = createActions(
   actionTypes.EDIT_COURSE_SUCCESS,
   actionTypes.EDIT_COURSE_ERROR,
   actionTypes.SET_ACTIVE_COURSE,
+  actionTypes.DELETE_COURSE,
+  actionTypes.DELETE_COURSE_SUCCESS,
+  actionTypes.DELETE_COURSE_ERROR,
 );
 
 const createCourse = (courseInfo, history) => dispatch => {
@@ -59,8 +62,31 @@ const getAllCourses = () => dispatch => {
     });
 };
 
+const filterCourses = (courses, id) => {
+  return courses.filter(course => course._id !== id);
+};
+
+const deleteCourse = courseInfo => (dispatch, getState) => {
+  dispatch(actions.deleteCourse());
+
+  courseService
+    .deleteCourse(courseInfo)
+    .then(() => {
+      console.log('courses', getState().coursesState.courses);
+      console.log('courses id', courseInfo._id);
+      dispatch(
+        actions.deleteCourseSuccess({
+          courses: filterCourses(getState().coursesState.courses, courseInfo._id),
+        }),
+      );
+    })
+    .catch(error => {
+      dispatch(actions.deleteCourseError({ error: error.response.data.errors[0] }));
+    });
+};
+
 const setActiveCourse = courseInfo => dispatch => {
   dispatch(actions.setActiveCourse({ activeCourse: courseInfo }));
 };
 
-export { actions, createCourse, editCourse, getAllCourses, setActiveCourse };
+export { actions, createCourse, editCourse, getAllCourses, setActiveCourse, deleteCourse };

@@ -6,9 +6,9 @@ import { Col, Row } from 'reactstrap';
 
 import CustomCard from './CustomCard';
 
-const Courses = ({ courses, setActiveCourse, history }) => {
+const Courses = ({ courses, setActiveCourse, history, deleteCourse }) => {
   const coursesComponent = courses.map(course => {
-    return <CustomCard key={course._id} {...{ course, setActiveCourse, history }} />;
+    return <CustomCard key={course._id} {...{ course, setActiveCourse, history, deleteCourse }} />;
   });
 
   return (
@@ -22,6 +22,7 @@ const Courses = ({ courses, setActiveCourse, history }) => {
 
 Courses.propTypes = {
   courses: PropTypes.array.isRequired,
+  deleteCourse: PropTypes.func.isRequired,
   setActiveCourse: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };

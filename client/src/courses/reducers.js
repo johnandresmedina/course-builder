@@ -11,6 +11,8 @@ const initialState = {
   fetchingCoursesError: false,
   editingCourse: false,
   editingCourseError: false,
+  deletingCourse: false,
+  deletingCourseError: false,
 };
 
 const CoursesReducer = handleActions(
@@ -66,6 +68,22 @@ const CoursesReducer = handleActions(
     [actions.setActiveCourse]: (state, action) => ({
       ...state,
       activeCourse: action.payload.activeCourse,
+    }),
+    [actions.deleteCourse]: state => ({
+      ...state,
+      deletingCourse: true,
+      deletingCourseError: {},
+    }),
+    [actions.deleteCourseSuccess]: (state, action) => ({
+      ...state,
+      deletingCourse: false,
+      courses: action.payload.courses,
+      deletingCourseError: {},
+    }),
+    [actions.deleteCourseError]: (state, action) => ({
+      ...state,
+      deletingCourse: false,
+      deletingCourseError: action.payload.error,
     }),
   },
   initialState,

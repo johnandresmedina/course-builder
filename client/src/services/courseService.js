@@ -21,10 +21,16 @@ const getAllCourses = async () => {
   return response;
 };
 
+const deleteCourse = async courseInfo => {
+  const response = await axios.delete(`/api/courses/${courseInfo._id}`);
+  return response;
+};
+
 const courseService = {
   createCourse,
   getAllCourses,
   editCourse,
+  deleteCourse,
 };
 
 export default courseService;

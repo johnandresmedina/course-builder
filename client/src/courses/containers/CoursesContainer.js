@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import { withRouter } from 'react-router-dom';
 
-import { getAllCourses, setActiveCourse } from '../../courses/actions';
+import { getAllCourses, setActiveCourse, deleteCourse } from '../../courses/actions';
 import Courses from '../components/Courses';
 import CustomSpinner from '../../spinner/CustomSpinner';
 
-const CoursesContainer = ({ history, courses, getAllCourses, setActiveCourse }) => {
+const CoursesContainer = ({ courses, deleteCourse, getAllCourses, history, setActiveCourse }) => {
   useEffect(() => {
     let didCancel = false;
 
@@ -22,7 +22,7 @@ const CoursesContainer = ({ history, courses, getAllCourses, setActiveCourse }) 
   }, [getAllCourses]);
 
   return !_isEmpty(courses) ? (
-    <Courses {...{ courses, setActiveCourse, history }} />
+    <Courses {...{ courses, setActiveCourse, history, deleteCourse }} />
   ) : (
     <CustomSpinner />
   );
@@ -30,6 +30,7 @@ const CoursesContainer = ({ history, courses, getAllCourses, setActiveCourse }) 
 
 CoursesContainer.propTypes = {
   courses: PropTypes.array.isRequired,
+  deleteCourse: PropTypes.func.isRequired,
   getAllCourses: PropTypes.func.isRequired,
   setActiveCourse: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
@@ -40,6 +41,6 @@ export default withRouter(
     state => ({
       courses: state.coursesState.courses,
     }),
-    { getAllCourses, setActiveCourse },
+    { getAllCourses, setActiveCourse, deleteCourse },
   )(CoursesContainer),
 );

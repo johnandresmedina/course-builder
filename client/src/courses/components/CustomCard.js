@@ -13,10 +13,14 @@ const truncateText = (text, limit) => {
   return text.length > limit ? `${text.substring(0, LIMIT_SUBTITLE)}...` : text;
 };
 
-const CustomCard = ({ course, setActiveCourse, history }) => {
+const CustomCard = ({ course, setActiveCourse, history, deleteCourse }) => {
   const handleOnEditClick = () => {
     setActiveCourse(course);
     history.push('/create-content');
+  };
+
+  const handleOnDeleteClick = () => {
+    deleteCourse(course);
   };
 
   return (
@@ -42,7 +46,7 @@ const CustomCard = ({ course, setActiveCourse, history }) => {
         <div className='course__card-icon' onClick={handleOnEditClick}>
           <FontAwesomeIcon size='xs' icon={faPen} />
         </div>
-        <div className='course__card-icon course__card-icon--delete'>
+        <div className='course__card-icon course__card-icon--delete' onClick={handleOnDeleteClick}>
           <FontAwesomeIcon icon={faTrash} />
         </div>
       </CardFooter>
@@ -52,6 +56,7 @@ const CustomCard = ({ course, setActiveCourse, history }) => {
 
 CustomCard.propTypes = {
   course: PropTypes.object.isRequired,
+  deleteCourse: PropTypes.func.isRequired,
   setActiveCourse: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
