@@ -4,4 +4,9 @@
   &__edit {
     cursor: pointer;
   }
+  &__placeholder {
+    text-align: center;
+    margin-top: 200px;
+    color: gray;
+  }
 }

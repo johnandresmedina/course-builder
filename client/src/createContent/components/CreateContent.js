@@ -16,25 +16,34 @@ const CreateContent = ({ activeCourse, showEditModal, toggleEditModal }) => {
 
   const buildContent = () => {
     return (
-      <Row>
-        <Col md={12}>
-          <div className='create-content'>
-            <h1 className='text-center'>
-              {activeCourse.title}{' '}
-              <Badge className='create-content__edit' color='light' onClick={handleOnClick}>
-                <FontAwesomeIcon size='xs' icon={faPen} />
-              </Badge>
-            </h1>
-            {showEditModal && (
-              <EditCourseModalContainer
-                activeCourse={activeCourse}
-                showEditModal
-                toggleModal={handleOnClick}
-              />
-            )}
-          </div>
-        </Col>
-      </Row>
+      <>
+        <Row>
+          <Col md={12}>
+            <div className='create-content'>
+              <h1 className='text-center'>
+                {activeCourse.title}{' '}
+                <Badge className='create-content__edit' color='light' onClick={handleOnClick}>
+                  <FontAwesomeIcon size='xs' icon={faPen} />
+                </Badge>
+              </h1>
+              {showEditModal && (
+                <EditCourseModalContainer
+                  activeCourse={activeCourse}
+                  showEditModal
+                  toggleModal={handleOnClick}
+                />
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <h3 className='create-content__placeholder'>
+              This is placeholder for the chapter and content features
+            </h3>
+          </Col>
+        </Row>
+      </>
     );
   };
 
