@@ -135,4 +135,27 @@ router.put(
   },
 );
 
+// @route DELETE api/courses
+// @desc Delete a course
+// @access Public
+router.delete('/:id', async (request, response) => {
+  try {
+    const course = await Course.findById(request.params.id);
+
+    if (!course) {
+      return response.status(404).json({ errors: { msg: 'Course not found' } });
+    }
+
+    await course.remove();
+    return response.status(200).send('done');
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === 'ObjectId') {
+      return response.status(404).json({ errors: { msg: 'Course not found' } });
+    }
+
+    response.status(500).send('Server error');
+  }
+});
+
 module.exports = router;
