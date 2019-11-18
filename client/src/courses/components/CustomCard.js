@@ -39,7 +39,10 @@ const CustomCard = ({ course, setActiveCourse, history, toggleDeleteModal }) => 
       {course.description && (
         <CardBody className='course__card-body'>
           <CardText>
-            <span>{truncateText(course.description, LIMIT_DESCRIPTION)}</span>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: truncateText(course.description, LIMIT_DESCRIPTION),
+              }}></span>
           </CardText>
         </CardBody>
       )}

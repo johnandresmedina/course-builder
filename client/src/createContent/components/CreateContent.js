@@ -39,7 +39,7 @@ const CreateContent = ({ activeCourse, showEditModal, toggleEditModal }) => {
         <Row>
           <Col md={12}>
             <h3 className='create-content__placeholder'>
-              This is placeholder for the chapter and content features
+              This is a placeholder for the chapter and content features
             </h3>
           </Col>
         </Row>

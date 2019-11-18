@@ -1,6 +1,18 @@
+import './courseForm.scss';
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, Col, Row, Form } from 'reactstrap';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
+  Col,
+  Row,
+  Form,
+  Label,
+} from 'reactstrap';
+import { Editor } from '@tinymce/tinymce-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,6 +26,16 @@ const isTitleError = (error, formValues) => showError('title')(formValues)(error
 
 const CourseForm = ({ courseError, updateField, formValues }) => {
   const titleError = isTitleError(courseError, formValues);
+
+  const handleEditor = text => {
+    const customEvent = {
+      target: {
+        name: 'description',
+        value: text,
+      },
+    };
+    updateField(customEvent);
+  };
 
   return (
     <Form>
@@ -37,12 +59,12 @@ const CourseForm = ({ courseError, updateField, formValues }) => {
           />
         </Col>
         <Col md={12}>
-          <CustomInput
-            label='description'
-            showLabel
-            type={'textarea'}
+          <Label for={'description'}>Description</Label>
+          <Editor
+            apiKey='39xhw3a7zjjy2otox46ap530ago8eldostpn6q1ps1ey1giq'
+            inline
             value={formValues.description}
-            onChange={updateField}
+            onEditorChange={handleEditor}
           />
         </Col>
         <Col md={6}>
