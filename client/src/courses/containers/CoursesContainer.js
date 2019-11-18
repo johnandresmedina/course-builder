@@ -4,11 +4,18 @@ import { connect } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import { withRouter } from 'react-router-dom';
 
-import { getAllCourses, setActiveCourse, deleteCourse } from '../../courses/actions';
+import { getAllCourses, setActiveCourse } from '../../courses/actions';
+import { toggleDeleteModal } from '../../modal/actions';
 import Courses from '../components/Courses';
 import CustomSpinner from '../../spinner/CustomSpinner';
 
-const CoursesContainer = ({ courses, deleteCourse, getAllCourses, history, setActiveCourse }) => {
+const CoursesContainer = ({
+  courses,
+  getAllCourses,
+  history,
+  setActiveCourse,
+  toggleDeleteModal,
+}) => {
   useEffect(() => {
     let didCancel = false;
 
@@ -22,7 +29,7 @@ const CoursesContainer = ({ courses, deleteCourse, getAllCourses, history, setAc
   }, [getAllCourses]);
 
   return !_isEmpty(courses) ? (
-    <Courses {...{ courses, setActiveCourse, history, deleteCourse }} />
+    <Courses {...{ courses, setActiveCourse, history, toggleDeleteModal }} />
   ) : (
     <CustomSpinner />
   );
@@ -30,9 +37,9 @@ const CoursesContainer = ({ courses, deleteCourse, getAllCourses, history, setAc
 
 CoursesContainer.propTypes = {
   courses: PropTypes.array.isRequired,
-  deleteCourse: PropTypes.func.isRequired,
   getAllCourses: PropTypes.func.isRequired,
   setActiveCourse: PropTypes.func.isRequired,
+  toggleDeleteModal: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
 
@@ -41,6 +48,6 @@ export default withRouter(
     state => ({
       courses: state.coursesState.courses,
     }),
-    { getAllCourses, setActiveCourse, deleteCourse },
+    { getAllCourses, setActiveCourse, toggleDeleteModal },
   )(CoursesContainer),
 );

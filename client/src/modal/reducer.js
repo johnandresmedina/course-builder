@@ -5,6 +5,7 @@ import { actions } from './actions';
 const initialState = {
   showModal: false,
   showEditModal: false,
+  showDeleteModal: false,
 };
 
 const CourseModalReducer = handleActions(
@@ -16,6 +17,10 @@ const CourseModalReducer = handleActions(
     [actions.toggleEditModal]: state => ({
       ...state,
       showEditModal: !state.showEditModal,
+    }),
+    [actions.toggleDeleteModal]: state => ({
+      ...state,
+      showDeleteModal: !state.showDeleteModal,
     }),
   },
   initialState,

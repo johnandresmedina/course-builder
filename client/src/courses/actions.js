@@ -72,8 +72,6 @@ const deleteCourse = courseInfo => (dispatch, getState) => {
   courseService
     .deleteCourse(courseInfo)
     .then(() => {
-      console.log('courses', getState().coursesState.courses);
-      console.log('courses id', courseInfo._id);
       dispatch(
         actions.deleteCourseSuccess({
           courses: filterCourses(getState().coursesState.courses, courseInfo._id),

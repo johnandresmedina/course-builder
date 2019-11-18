@@ -13,14 +13,15 @@ const truncateText = (text, limit) => {
   return text.length > limit ? `${text.substring(0, LIMIT_SUBTITLE)}...` : text;
 };
 
-const CustomCard = ({ course, setActiveCourse, history, deleteCourse }) => {
+const CustomCard = ({ course, setActiveCourse, history, toggleDeleteModal }) => {
   const handleOnEditClick = () => {
     setActiveCourse(course);
     history.push('/create-content');
   };
 
   const handleOnDeleteClick = () => {
-    deleteCourse(course);
+    setActiveCourse(course);
+    toggleDeleteModal();
   };
 
   return (
@@ -56,8 +57,8 @@ const CustomCard = ({ course, setActiveCourse, history, deleteCourse }) => {
 
 CustomCard.propTypes = {
   course: PropTypes.object.isRequired,
-  deleteCourse: PropTypes.func.isRequired,
   setActiveCourse: PropTypes.func.isRequired,
+  toggleDeleteModal: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
 
