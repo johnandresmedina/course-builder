@@ -19,6 +19,7 @@ const CustomInput = ({ invalid, type, error, label, showLabel, onChange, value }
         value={value}
         onChange={onChange}
         invalid={invalid}
+        maxLength={255}
       />
       {invalid && <FormFeedback>{error.msg}</FormFeedback>}
     </FormGroup>
